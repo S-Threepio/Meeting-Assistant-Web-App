@@ -1,26 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
+import React ,{useRef,useState} from 'react';
 import './App.css';
+import Navbar from './components/Navbar/Navbar'
+import Nav from './Nav';
+import About from './About';
+import Shop from './Shop';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import TemporaryDrawer from './components/Drawer/drawer';
 
 function App() {
+
+  
+  const [clicked,handleClick] = useState(false)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Navbar isClicked={clicked} clickHandler={handleClick}  />
+        <TemporaryDrawer isClicked={clicked} clickHandler={handleClick} />
     </div>
-  );
-}
-
+  )}
 export default App;
+
+
+
+
+
+//     <Router>
+//       <div className="App">
+//         <Nav />
+//         <Switch>
+//           <Route path="/" exact component={Home} />
+//           <Route path="/about" component={About} />
+//           <Route path="/contact" component={contact us} />
+//         </Switch>
+//       </div>
+//     </Router>
+//   );
+// }
+
+// const Home = () => {
+//   return (
+//     <div>
+//       <h1>Home Page</h1>
+//     </div>
+//   )
+// }
