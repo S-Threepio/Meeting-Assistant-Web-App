@@ -14,7 +14,10 @@ import './drawer.css';
 import { Link } from 'react-router-dom';
 import drawerData from '../../data/drawerData.json';
 
-
+const Components = {
+  check: InboxIcon,
+  analysis: MailIcon
+};
 
 const useStyles = makeStyles({
   list: {
@@ -54,7 +57,7 @@ export default function TemporaryDrawer(props){
         {drawerData.map(data => (
             <a class='sprint-content' href={data.url}> 
             <ListItem button key={data.buttonText} >
-            <ListItemIcon>{<MailIcon />}</ListItemIcon>
+        <ListItemIcon>{React.createElement(Components[data.component])}</ListItemIcon>
             <ListItemText primary={data.buttonText} />
             </ListItem>
             </a>
