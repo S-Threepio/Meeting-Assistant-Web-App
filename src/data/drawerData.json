@@ -1,4 +1,4 @@
 [
-    { "text": "Check Analysed Data", "url":"/check"},
-    { "text": "Sprint wise analysis", "url":"/analysis" }
+    { "buttonText": "Check Analysed Data", "url":"/check","component":"Check"},
+    { "buttonText": "Sprint wise analysis", "url":"/analysis","component":"Analysis" }
 ]

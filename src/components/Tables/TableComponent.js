@@ -3,8 +3,6 @@ import './Sprints.css'
 import sprints from '../../data/sprints.json'
 import { Row, Col } from 'react-simple-flex-grid';
 import "react-simple-flex-grid/lib/main.css";
-import { useState } from 'react';
-import { Opacity } from '@material-ui/icons';
 
 
 const TableComponent = () => { 
