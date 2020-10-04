@@ -10,13 +10,18 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import './drawer.css';
+import { Link } from 'react-router-dom'
+
+
 
 const useStyles = makeStyles({
   list: {
-    width: 250,
+    width: 250
   },
   fullList: {
     width: 'auto',
+    backgroundColor : 'black',
   },
 });
 
@@ -46,10 +51,12 @@ export default function TemporaryDrawer(props){
     >
       <List>
         {['Check Analysed Data', 'Sprint wise analysis'].map((text, index) => (
-          <ListItem button key={text}>
+            <a class='sprint-content' href='check'> 
+            <ListItem button key={text} >
             <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
             <ListItemText primary={text} />
-          </ListItem>
+            </ListItem>
+            </a>
         ))}
       </List>
       <Divider />

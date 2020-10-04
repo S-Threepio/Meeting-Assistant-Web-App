@@ -1,0 +1,36 @@
+.content-table{
+    margin :5%;
+    text-align: center;
+    cursor: pointer;
+}
+.sprint:hover{
+   transform:scale(1.1) ;
+   opacity: 100%;
+   z-index: 1;
+  }
+#head {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: wheat;
+    color: black;
+    text-align: center;
+    margin-top: 3%;
+    font-weight: bolder;
+    padding: 12px;
+    opacity: 90%;
+  }
+
+ #body {
+    line-height: 1.6;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: ivory;
+    min-height: 90px;
+    text-decoration: black;
+    opacity: 100%;
+  }
+
+  /* NOT WORKING */
+
+
+  
