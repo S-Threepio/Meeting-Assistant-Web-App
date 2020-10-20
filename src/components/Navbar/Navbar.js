@@ -6,8 +6,8 @@ import { Button } from '../Button';
 
 class Navbar extends Component {
 
-    constructor(props) {
-        super(props)
+    constructor() {
+        super()
     }
 
     componentDidMount(){

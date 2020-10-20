@@ -1,45 +1,99 @@
-import React, { useRef, useState } from 'react';
-import './App.css';
-import Navbar from './components/Navbar/Navbar'
-import Nav from './Nav';
-import About from './About';
-import Shop from './Shop';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import TemporaryDrawer from './components/Drawer/drawer'
-import TableComponent from './components/Tables/TableComponent';
+import React, { Component, useRef, useState } from 'react';
+import Dashboard from './Dashboard';
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Home from "./Home";
 
+export default class App extends Component{
+  constructor() {
+    super();
 
-function App() {
+    this.state = {
+      loggedInStatus: "NOT_LOGGED_IN",
+      user: {}
+    };
 
+    this.handleLogin = this.handleLogin.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
+  }
 
-  const [clicked, handleClick] = useState(false)
+  checkLoginStatus() {
+    // axios
+    //   .get("http://localhost:3001/logged_in", { withCredentials: true })
+    //   .then(response => {
+    //     if (
+    //       response.data.logged_in &&
+    //       this.state.loggedInStatus === "NOT_LOGGED_IN"
+    //     ) {
+    //       this.setState({
+    //         loggedInStatus: "LOGGED_IN",
+    //         user: response.data.user
+    //       });
+    //     } else if (
+    //       !response.data.logged_in &
+    //       (this.state.loggedInStatus === "LOGGED_IN")
+    //     ) {
+    //       this.setState({
+    //         loggedInStatus: "NOT_LOGGED_IN",
+    //         user: {}
+    //       });
+    //     }
+    //   })
+    //   .catch(error => {
+    //     console.log("check login error", error);
+    //   });
+    this.setState({
+              loggedInStatus: "LOGGED_IN",
+              user: {name:'swanand',email:'swanand@gmail'}
+            });
+  }
 
-  return (
-    <div className="App">
-      <Router>
-      <Navbar isClicked={clicked} clickHandler={handleClick} />
-      <TemporaryDrawer isClicked={clicked} clickHandler={handleClick} />
-        <Switch>
-          <Route path="/" exact component={TableComponent} />
-          <Route path="/about" component={About} />
-          <Route path="/contact" component={Shop} />
-        </Switch>
-    </Router>
-    </div>
-  )
+  componentDidMount() {
+    this.checkLoginStatus();
+  }
+
+  handleLogout() {
+    this.setState({
+      loggedInStatus: "NOT_LOGGED_IN",
+      user: {}
+    });
+  }
+
+  handleLogin(data) {
+    this.setState({
+      loggedInStatus: "LOGGED_IN",
+      user: data.user
+    });
+  }
+
+  render() {
+    return (
+      <div className="app">
+        <BrowserRouter>
+          <Switch>
+            <Route
+              exact
+              path={"/"}
+              render={props => (
+                <Home
+                  {...props}
+                  handleLogin={this.handleLogin}
+                  handleLogout={this.handleLogout}
+                  loggedInStatus={this.state.loggedInStatus}
+                />
+              )}
+            />
+            <Route
+              path={"/dashboard"}
+              render={props => (
+                <Dashboard
+                  {...props}
+                  loggedInStatus={this.state.loggedInStatus}
+                />
+              )}
+            />
+          </Switch>
+        </BrowserRouter>
+      </div>
+    );
+  }
 }
-export default App;
-
-
-
-
-
-
-
-// const Home = () => {
-//   return (
-//     <div>
-//       <h1>Home Page</h1>
-//     </div>
-//   )
-// }
