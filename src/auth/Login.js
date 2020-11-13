@@ -1,4 +1,7 @@
 import React, { Component } from "react"
+import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
+import UserPool from "./UserPool";
+
 
 export default class Login extends Component {
   constructor(props) {
@@ -7,7 +10,8 @@ export default class Login extends Component {
     this.state = {
       email: "",
       password: "",
-      loginErrors: ""
+      loginErrors: "",
+      clicked :false
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,27 +27,46 @@ export default class Login extends Component {
   handleSubmit(event) {
     const { email, password } = this.state;
     const response = {data : 'swanand', email:'swanand@gmail'}
-    // axios
-    //   .post(
-    //     "http://localhost:3001/sessions",
-    //     {
-    //       user: {
-    //         email: email,
-    //         password: password
-    //       }
-    //     },
-    //     { withCredentials: true }
-    //   )
-    //   .then(response => {
-    //     if (response.data.logged_in) {
-    //       this.props.handleSuccessfulAuth(response.data);
-    //     }
-    //   })
-    //   .catch(error => {
-    //     console.log("login error", error);
-    //   });
-    // event.preventDefault();
-    this.props.handleSuccessfulAuth(response.data);
+
+    const user = new CognitoUser({
+      Username: email,
+      Pool: UserPool
+    });
+    const authDetails = new AuthenticationDetails({
+      Username: email,
+      Password: password
+    });
+
+    this.setState(
+      {
+        clicked : true
+      }
+    )
+
+    user.authenticateUser(authDetails, {
+      onSuccess: data => {
+        this.props.handleSuccessfulAuth(data);
+      },
+
+      onFailure: err => {
+        this.setState(
+          {
+            clicked : false
+          }
+        )
+        console.log("onFailure:", err);
+      },
+
+      newPasswordRequired: data => {
+        this.setState(
+          {
+            clicked : false
+          }
+        )
+        console.log("newPasswordRequired:", data);
+      }
+    });
+    event.preventDefault();
 
   }
 
@@ -69,7 +92,8 @@ export default class Login extends Component {
             required
           />
 
-          <button type="submit">Login</button>
+          <button type="submit">
+          {this.state.clicked ? <i class="fa fa-spinner fa-spin"/> : null}Login</button>
         </form>
       </div>
     );
