@@ -1,4 +1,5 @@
 [
-    { "id":1,"buttonText": "Check Analysed Data", "url":"/dashboard/check","component":"check"},
-    { "id":2,"buttonText": "Sprint wise analysis", "url":"/dashboard/analysis","component":"analysis" }
+    { "id":1,"buttonText": "Happiness Index", "url":"/dashboard/happinessIndex","component":"happiness"},
+    { "id":2,"buttonText": "Trending Topics", "url":"/dashboard/trendingTopics","component":"trending" },
+    { "id":3,"buttonText": "Transcription", "url":"/dashboard/transcription","component":"transcription" }
 ]

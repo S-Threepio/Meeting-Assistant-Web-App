@@ -10,13 +10,14 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import './drawer.css';
-import { Link } from 'react-router-dom';
+import LoyaltyIcon from '@material-ui/icons/Loyalty';
+import '../drawer/Drawer.css';
 import drawerData from '../../data/drawerData.json';
 
 const Components = {
-  check: InboxIcon,
-  analysis: MailIcon
+  happiness: InboxIcon,
+  trending: MailIcon,
+  transcription : LoyaltyIcon
 };
 
 const useStyles = makeStyles({

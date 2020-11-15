@@ -1,7 +1,7 @@
 import React, { Component, useRef, useState } from 'react';
-import Dashboard from './Dashboard';
+import Dashboard from './components/pages/Dashboard';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Home from "./Home";
+import Home from "./auth/Home";
 
 export default class App extends Component{
   constructor() {
