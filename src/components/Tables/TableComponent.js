@@ -3,15 +3,13 @@ import './Sprints.css'
 import sprints from '../../data/sprints.json'
 import { Row, Col } from 'react-simple-flex-grid';
 import "react-simple-flex-grid/lib/main.css";
-import axios from '../../data/axios';
-import AWS from 'aws-sdk';
 
 
-const TableComponent = () => {
-  const [results, setResults] = useState([]);
 
+const TableComponent = (props) => {
+  const { results } = props
   function handleClick(props) {
-    alert("sprint " + props + " is clicked")
+    alert("sprint " + props.id + " is clicked")
     console.log(props)
   }
 
@@ -24,7 +22,7 @@ const TableComponent = () => {
             <Col gutter={50}
               xs={{ span: 6 }} sm={{ span: 5 }} md={{ span: 5 }}
               lg={{ span: 5 }} xl={{ span: 4 }}
-            ><div className="sprint" onClick={() => handleClick(co.id)}><div id="head">{co.id}</div><div id="body" >{co.mom}</div></div></Col>
+            ><div className="sprint" onClick={() => handleClick(co)}><div id="head">{co.id}</div><div id="body" >{co.mom}</div></div></Col>
           )}
         </Row>
 
@@ -38,21 +36,6 @@ const TableComponent = () => {
   //     method: 'GET',
   //     headers: headers
   // })
-
-
-  useEffect(() => {
-    axios
-      .get(`/items`)
-      .then(res => {
-        res.data.Items.forEach(element => {
-          setResults(prevResults => ([...prevResults, AWS.DynamoDB.Converter.unmarshall(element)]))  
-        });
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }, [])
-
   return (results ? showTables(results) : null)
 
 }
