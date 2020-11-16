@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import { MenuItems } from './MenuItems';
 import './Navbar.css';
 import { Button } from '../Button';
+import { withRouter } from 'react-router-dom';
 
 
 class Navbar extends Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
     }
 
-    componentDidMount(){
-            console.log(this.props.isClicked)
+    componentDidMount() {
+        console.log(this.props.isClicked)
     }
 
 
@@ -37,7 +38,7 @@ class Navbar extends Component {
                     }
 
                 </ul>
-                <Button>Log out</Button>
+                <Button><a style={{ color: 'black', textDecoration: 'none' }} href='/'>Log out</a></Button>
             </nav>
 
         )
