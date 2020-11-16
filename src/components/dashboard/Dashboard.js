@@ -1,10 +1,10 @@
 
 import React, { useEffect, useState } from 'react'
 
-import '../../App.css';
+import '../dashboard/dashboard.css';
 import Navbar from '../navbar/Navbar'
-import About from './About';
-import Shop from './Shop';
+import About from '../pages/About';
+import Shop from '../pages/Shop';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import TemporaryDrawer from '../drawer/Drawer'
 import TableComponent from '../tables/TableComponent';
@@ -35,7 +35,7 @@ function Dashboard() {
   }, [])
 
   return (
-    <div className="App">
+    <div className="Dashboard">
       <Navbar isClicked={clicked} clickHandler={handleClick} />
       <TemporaryDrawer isClicked={clicked} clickHandler={handleClick} />
       <Router>

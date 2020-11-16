@@ -11,7 +11,7 @@ export default class Login extends Component {
       email: "",
       password: "",
       loginErrors: "",
-      clicked :false
+      clicked: false
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,9 +24,15 @@ export default class Login extends Component {
     });
   }
 
+  getErrorMessage(props){
+    console.log(props)
+    if(props=="NotAuthorizedException")
+    return `Username or password invalid :(`
+  }
+
   handleSubmit(event) {
     const { email, password } = this.state;
-    const response = {data : 'swanand', email:'swanand@gmail'}
+    const response = { data: 'swanand', email: 'swanand@gmail' }
 
     const user = new CognitoUser({
       Username: email,
@@ -39,7 +45,7 @@ export default class Login extends Component {
 
     this.setState(
       {
-        clicked : true
+        clicked: true
       }
     )
 
@@ -51,7 +57,8 @@ export default class Login extends Component {
       onFailure: err => {
         this.setState(
           {
-            clicked : false
+            clicked: false,
+            loginErrors: this.getErrorMessage(err.code)
           }
         )
         console.log("onFailure:", err);
@@ -60,7 +67,7 @@ export default class Login extends Component {
       newPasswordRequired: data => {
         this.setState(
           {
-            clicked : false
+            clicked: false
           }
         )
         console.log("newPasswordRequired:", data);
@@ -91,9 +98,9 @@ export default class Login extends Component {
             onChange={this.handleChange}
             required
           />
-
           <button type="submit">
-          {this.state.clicked ? <i class="fa fa-spinner fa-spin"/> : null}Login</button>
+            {this.state.clicked ? <i class="fa fa-spinner fa-spin" /> : null}Login</button>
+          <div className="login-error">{this.state.loginErrors}</div>
         </form>
       </div>
     );

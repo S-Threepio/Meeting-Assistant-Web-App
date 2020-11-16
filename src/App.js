@@ -1,5 +1,5 @@
 import React, { Component, useRef, useState } from 'react';
-import Dashboard from './components/pages/Dashboard';
+import Dashboard from './components/dashboard/Dashboard.js';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./auth/Home";
 
