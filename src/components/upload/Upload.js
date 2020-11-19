@@ -3,14 +3,13 @@ import { uploadFile } from 'react-s3';
 import '../upload/Upload.css'
 import { Button } from 'react-bootstrap';
 import Loader from 'react-loader-spinner';
-
-
+import aws from '../../data/aws.json';
 
 const config = {
     bucketName: 'aws-transcribe-mssda-test-dev-records',
     region: 'us-east-1',
-    accessKeyId: 'AKIA4Y7GXALUYNZZ6526',
-    secretAccessKey: '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',
+    accessKeyId: aws.aws_access_key_id,
+    secretAccessKey: aws.aws_secret_access_key,
 }
 
 class Upload extends Component {
