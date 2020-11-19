@@ -11,12 +11,6 @@ class Navbar extends Component {
         super(props)
     }
 
-    componentDidMount() {
-        console.log(this.props.isClicked)
-    }
-
-
-
     render() {
         return (
             <nav className="NavbarItems">

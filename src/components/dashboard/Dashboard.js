@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import TemporaryDrawer from '../drawer/Drawer'
 import TableComponent from '../tables/TableComponent';
 import axios from '../../data/axios';
+import Upload from '../upload/Upload'
 import AWS from 'aws-sdk';
 import HappinessIndex from '../happinessIndex/HappinessIndex'
 import TrendingTopics from '../trendingTopics/TrendingTopics'
@@ -47,6 +48,7 @@ function Dashboard() {
           <Route path="/dashboard" exact component={() => <TableComponent results={results} />} />
           <Route path="/dashboard/about" component={About} />
           <Route path="/dashboard/contact" component={Shop} />
+          <Route path="/dashboard/upload" component={Upload} />
           <Route path="/dashboard/happinessIndex" component={() => <HappinessIndex results={results} />} />
           <Route path="/dashboard/trendingTopics" component={() => <TrendingTopics results={results} />} />
           <Route path="/dashboard/transcription" component={() => <Transcription results={results} />} />
