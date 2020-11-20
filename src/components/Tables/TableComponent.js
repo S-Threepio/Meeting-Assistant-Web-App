@@ -3,14 +3,20 @@ import './Sprints.css'
 import sprints from '../../data/sprints.json'
 import { Row, Col } from 'react-simple-flex-grid';
 import "react-simple-flex-grid/lib/main.css";
+import { useHistory } from "react-router-dom";
+
 
 
 
 const TableComponent = (props) => {
+  const history = useHistory();
   const { results } = props
+
   function handleClick(props) {
-    alert("sprint " + props.id + " is clicked")
-    console.log(props)
+    history.push({
+      pathname: '/dashboard/transcription',
+      state: { detail: props }
+    })
   }
 
   function showTables(props) {

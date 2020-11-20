@@ -1,7 +1,9 @@
 .HappinessIndex {
     background-color: white;
-    margin: 0;
-    bottom: 0;    
     overflow: auto;
-    height: 100vh;
+    justify-content: center;
+    display: flex;
+    height: 100%;
+    padding-top: 10%;
+    padding-right: 10px;
 }

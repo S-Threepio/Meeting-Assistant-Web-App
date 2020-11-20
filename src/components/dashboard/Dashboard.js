@@ -23,14 +23,19 @@ function Dashboard() {
   const [isLoading, setLoading] = useState(true)
   const [clicked, handleClick] = useState(false)
   const [results, setResults] = useState([]);
+  const [dataPoints, setDataPoints] = useState([]);
 
+  var count = 0
   useEffect(() => {
     axios
       .get(`/items`)
       .then(res => {
         res.data.Items.forEach(element => {
-          setResults(prevResults => ([...prevResults, AWS.DynamoDB.Converter.unmarshall(element)]))
-        });
+          const parsed = AWS.DynamoDB.Converter.unmarshall(element)
+          setResults(prevResults => ([...prevResults, parsed]))
+          setDataPoints(prevResults => ([...prevResults, { y: parsed.happinessIndex, label: parsed.id, x : count++ }]))
+        });         
+
         setLoading(false)
       })
       .catch((error) => {
@@ -39,9 +44,9 @@ function Dashboard() {
   }, [])
 
   return (isLoading ? <div className="Loading">
-    <Loader type="ThreeDots" color="#2BAD60"/>
+    <Loader type="ThreeDots" color="#2BAD60" />
   </div > : <div className="Dashboard">
-      <Navbar isClicked={clicked} clickHandler={handleClick} history={window.history}/>
+      <Navbar isClicked={clicked} clickHandler={handleClick} history={window.history} />
       <TemporaryDrawer isClicked={clicked} clickHandler={handleClick} />
       <Router>
         <Switch>
@@ -49,9 +54,9 @@ function Dashboard() {
           <Route path="/dashboard/about" component={About} />
           <Route path="/dashboard/contact" component={Shop} />
           <Route path="/dashboard/upload" component={Upload} />
-          <Route path="/dashboard/happinessIndex" component={() => <HappinessIndex results={results} />} />
+          <Route path="/dashboard/happinessIndex" component={() => <HappinessIndex dataPoints={dataPoints} />} />
           <Route path="/dashboard/trendingTopics" component={() => <TrendingTopics results={results} />} />
-          <Route path="/dashboard/transcription" component={() => <Transcription results={results} />} />
+          <Route path="/dashboard/transcription" component={() => <Transcription/>} />
         </Switch>
       </Router>
     </div>)
