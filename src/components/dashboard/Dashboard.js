@@ -7,7 +7,7 @@ import About from '../pages/About';
 import Shop from '../pages/Contact';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import TemporaryDrawer from '../drawer/Drawer'
-import TableComponent from '../tables/TableComponent';
+import TableComponent from '../tables/MoMComponent';
 import axios from '../../data/axios';
 import Upload from '../upload/Upload'
 import AWS from 'aws-sdk';
@@ -16,6 +16,9 @@ import TrendingTopics from '../trendingTopics/TrendingTopics'
 import Transcription from '../transcription/Transcription';
 import Loader from 'react-loader-spinner';
 import '../dashboard/loading.css'
+import MinutesOfMeeting from '../mom/MinutesOfMeeting';
+import MoMComponent from '../tables/MoMComponent';
+import TranscriptionComponent from '../tables/TranscriptionComponent';
 
 
 function Dashboard() {
@@ -50,13 +53,15 @@ function Dashboard() {
       <TemporaryDrawer isClicked={clicked} clickHandler={handleClick} />
       <Router>
         <Switch>
-          <Route path="/dashboard" exact component={() => <TableComponent results={results} />} />
-          <Route path="/dashboard/about" component={About} />
-          <Route path="/dashboard/contact" component={Shop} />
+          <Route path="/dashboard" exact component={() => <MoMComponent results={results} />} />
+          <Route path="/dashboard/transcriptions" exact component={() => <TranscriptionComponent results={results} />} />
           <Route path="/dashboard/upload" component={Upload} />
           <Route path="/dashboard/happinessIndex" component={() => <HappinessIndex dataPoints={dataPoints} />} />
           <Route path="/dashboard/trendingTopics" component={() => <TrendingTopics results={results} />} />
           <Route path="/dashboard/transcription" component={() => <Transcription/>} />
+          <Route path="/dashboard/mom" component={() => <MinutesOfMeeting/>} />
+          <Route path="/dashboard/about" component={About} />
+          <Route path="/dashboard/contact" component={Shop} />
         </Switch>
       </Router>
     </div>)

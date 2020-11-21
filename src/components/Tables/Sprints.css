@@ -2,6 +2,7 @@
     margin :5%;
     text-align: center;
     cursor: pointer;
+    
 }
 .sprint:hover{
    transform:scale(1.1) ;
@@ -17,7 +18,7 @@
     text-align: center;
     margin-top: 3%;
     font-weight: bolder;
-    padding: 12px;
+    padding: 10px;
     opacity: 90%;
   }
 
@@ -29,6 +30,7 @@
     min-height: 90px;
     text-decoration: black;
     opacity: 100%;
+    padding: 10px;
   }
 
   /* NOT WORKING */

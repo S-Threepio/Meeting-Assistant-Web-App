@@ -8,13 +8,13 @@ import { useHistory } from "react-router-dom";
 
 
 
-const TableComponent = (props) => {
+const MoMComponent = (props) => {
   const history = useHistory();
   const { results } = props
 
   function handleClick(props) {
     history.push({
-      pathname: '/dashboard/transcription',
+      pathname: '/dashboard/mom',
       state: { detail: props }
     })
   }
@@ -28,7 +28,7 @@ const TableComponent = (props) => {
             <Col gutter={50}
               xs={{ span: 6 }} sm={{ span: 5 }} md={{ span: 5 }}
               lg={{ span: 5 }} xl={{ span: 4 }}
-            ><div className="sprint" onClick={() => handleClick(co)}><div id="head">{co.id}</div><div id="body" >{co.mom}</div></div></Col>
+            ><div className="sprint" onClick={() => handleClick(co)}><div id="head">{co.id}</div><div id="body" >{co.mom.substring(0,250)+"..."}</div></div></Col>
           )}
         </Row>
 
@@ -46,4 +46,4 @@ const TableComponent = (props) => {
 
 }
 
-export default TableComponent
+export default MoMComponent
