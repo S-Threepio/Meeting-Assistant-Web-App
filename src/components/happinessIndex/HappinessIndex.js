@@ -8,10 +8,8 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 export function HappinessIndex(props) {
     const [options, setOptions] = useState();
     
-
     useEffect(() => {
-       
-        console.log(props)
+        props.setTitle('Happiness Index')
         setOptions({
             animationEnabled: true,
             title: {

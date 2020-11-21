@@ -10,7 +10,11 @@ import { useHistory } from "react-router-dom";
 
 const TranscriptionComponent = (props) => {
   const history = useHistory();
-  const { results } = props
+  const {results,setTitle} = props
+
+  useEffect(() => {
+    setTitle("Transcriptions")
+  }, [])
 
   function handleClick(props) {
     history.push({
@@ -20,11 +24,10 @@ const TranscriptionComponent = (props) => {
   }
 
   function showTables(props) {
-    console.log(props)
     return (
       <div className="content-table">
         <Row gutter={40}>
-          {props.map(co =>
+          {results.map(co =>
             <Col gutter={50}
               xs={{ span: 6 }} sm={{ span: 5 }} md={{ span: 5 }}
               lg={{ span: 5 }} xl={{ span: 4 }}

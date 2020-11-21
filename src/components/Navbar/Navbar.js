@@ -2,22 +2,17 @@ import React, { Component } from 'react';
 import { MenuItems } from './MenuItems';
 import './Navbar.css';
 import { Button } from '../Button';
-import { withRouter } from 'react-router-dom';
+import { Prev } from 'react-bootstrap/esm/PageItem';
 
 
 class Navbar extends Component {
-
-    constructor(props) {
-        super(props)
-    }
-
     render() {
         return (
             <nav className="NavbarItems">
                 <div className="menu-icon" onClick={() => this.props.clickHandler(!this.props.isClicked)}>
                     <i className='fas fa-bars'></i>
                 </div>
-                <h1 className="navbar-logo">MSSDA<i className="fab fa-react"></i></h1>
+                <h1 className="navbar-logo" key = {this.props.title}>{this.props.title}<i className="fab fa-react"></i></h1>
 
                 <ul className={this.props.isClicked ? 'nav-menu active' : 'nav-menu'}>
                     {

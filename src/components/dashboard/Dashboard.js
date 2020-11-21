@@ -23,6 +23,7 @@ import TranscriptionComponent from '../tables/TranscriptionComponent';
 
 function Dashboard() {
 
+  const [title, setTitle] = useState('MSSDA');
   const [isLoading, setLoading] = useState(true)
   const [clicked, handleClick] = useState(false)
   const [results, setResults] = useState([]);
@@ -46,20 +47,25 @@ function Dashboard() {
       })
   }, [])
 
+  useEffect(() => {
+    console.log("parent"+title)
+  }, [title])
+
+
   return (isLoading ? <div className="Loading">
     <Loader type="ThreeDots" color="#2BAD60" />
   </div > : <div className="Dashboard">
-      <Navbar isClicked={clicked} clickHandler={handleClick} history={window.history} />
-      <TemporaryDrawer isClicked={clicked} clickHandler={handleClick} />
+      <Navbar isClicked={clicked} clickHandler={handleClick} title={title}/>
+      <TemporaryDrawer isClicked={clicked} clickHandler={handleClick}/>
       <Router>
         <Switch>
-          <Route path="/dashboard" exact component={() => <MoMComponent results={results} />} />
-          <Route path="/dashboard/transcriptions" exact component={() => <TranscriptionComponent results={results} />} />
-          <Route path="/dashboard/upload" component={Upload} />
-          <Route path="/dashboard/happinessIndex" component={() => <HappinessIndex dataPoints={dataPoints} />} />
-          <Route path="/dashboard/trendingTopics" component={() => <TrendingTopics results={results} />} />
-          <Route path="/dashboard/transcription" component={() => <Transcription/>} />
-          <Route path="/dashboard/mom" component={() => <MinutesOfMeeting/>} />
+          <Route path="/dashboard" exact component={() => <MoMComponent results={results} setTitle={setTitle} />} />
+          <Route path="/dashboard/transcriptions" exact component={() => <TranscriptionComponent results={results} setTitle={setTitle}/>} />
+          <Route path="/dashboard/upload" component={() =><Upload setTitle={setTitle}/>}/>
+          <Route path="/dashboard/happinessIndex" component={() => <HappinessIndex dataPoints={dataPoints} setTitle={setTitle}/>} />
+          <Route path="/dashboard/trendingTopics" component={() => <TrendingTopics results={results} setTitle={setTitle}/>} />
+          <Route path="/dashboard/transcription" component={() => <Transcription/>} setTitle={setTitle}/>
+          <Route path="/dashboard/mom" component={() => <MinutesOfMeeting/>} setTitle={setTitle}/>
           <Route path="/dashboard/about" component={About} />
           <Route path="/dashboard/contact" component={Shop} />
         </Switch>

@@ -25,6 +25,11 @@ class Upload extends Component {
         this.onFileUpload = this.onFileUpload.bind(this);
     }
 
+    componentDidMount() {
+        console.log(this.props)
+        this.props.setTitle("Upload Your Recording")
+    }
+
     onFileChange(event) {
         console.log(event.target.files[0])
         this.setState({ selectedFile: event.target.files[0] });
