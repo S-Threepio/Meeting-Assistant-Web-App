@@ -2,6 +2,6 @@
     { "id":1,"buttonText": "Upload File", "url":"/dashboard/upload","component":"upload" },
     { "id":2,"buttonText": "Happiness Index", "url":"/dashboard/happinessIndex","component":"happiness"},
     { "id":3,"buttonText": "Trending Topics", "url":"/dashboard/trendingTopics","component":"trending" },
-    { "id":4,"buttonText": "Minutes Of Meetings", "url":"/dashboard","component":"trending" },
-    { "id":5,"buttonText": "Transcriptions", "url":"/dashboard/transcriptions","component":"trending" }
+    { "id":4,"buttonText": "Minutes Of Meetings", "url":"/dashboard","component":"mom" },
+    { "id":5,"buttonText": "Transcriptions", "url":"/dashboard/transcriptions","component":"transcription" }
 ]

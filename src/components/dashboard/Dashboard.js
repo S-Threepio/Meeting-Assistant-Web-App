@@ -12,13 +12,15 @@ import axios from '../../data/axios';
 import Upload from '../upload/Upload'
 import AWS from 'aws-sdk';
 import HappinessIndex from '../happinessIndex/HappinessIndex'
-import TrendingTopics from '../trendingTopics/TrendingTopics'
+import TrendingTopics from '../tables/TrendingTopics'
 import Transcription from '../transcription/Transcription';
 import Loader from 'react-loader-spinner';
 import '../dashboard/loading.css'
 import MinutesOfMeeting from '../mom/MinutesOfMeeting';
 import MoMComponent from '../tables/MoMComponent';
 import TranscriptionComponent from '../tables/TranscriptionComponent';
+import moment from 'moment';
+
 
 
 function Dashboard() {
@@ -36,6 +38,7 @@ function Dashboard() {
       .then(res => {
         res.data.Items.forEach(element => {
           const parsed = AWS.DynamoDB.Converter.unmarshall(element)
+          parsed.id = moment(parsed.id).format("D MMM YYYY")
           setResults(prevResults => ([...prevResults, parsed]))
           setDataPoints(prevResults => ([...prevResults, { y: parsed.happinessIndex, label: parsed.id, x : count++ }]))
         });         
@@ -46,10 +49,6 @@ function Dashboard() {
         console.log(error)
       })
   }, [])
-
-  useEffect(() => {
-    console.log("parent"+title)
-  }, [title])
 
 
   return (isLoading ? <div className="Loading">

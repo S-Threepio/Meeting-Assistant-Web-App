@@ -14,22 +14,25 @@ import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import CloudUpload from '@material-ui/icons/CloudUpload';
 import '../drawer/Drawer.css';
 import drawerData from '../../data/drawerData.json';
+import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
+import WhatshotIcon from '@material-ui/icons/Whatshot';
+import ChatIcon from '@material-ui/icons/Chat';
+import AvTimerIcon from '@material-ui/icons/AvTimer';
 
 const Components = {
   upload: CloudUpload,
-  happiness: InboxIcon,
-  trending: MailIcon,
-  transcription: LoyaltyIcon
+  happiness: EmojiEmotionsIcon,
+  trending: WhatshotIcon,
+  transcription: ChatIcon,
+  mom:AvTimerIcon
 };
 
 const useStyles = makeStyles({
   list: {
-    width: 250
-  },
-  fullList: {
-    width: 'auto',
-    backgroundColor: 'black',
-  },
+    width: 250,
+    textDecoration : 'black',
+    fontWeight : 'bold'
+  }
 });
 
 export default function TemporaryDrawer(props) {
