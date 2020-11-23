@@ -4,6 +4,8 @@ import '../upload/Upload.css'
 import { Button } from 'react-bootstrap';
 import Loader from 'react-loader-spinner';
 import aws from '../../data/aws.json';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 const config = {
     bucketName: 'aws-transcribe-mssda-test-dev-records',
@@ -11,19 +13,25 @@ const config = {
     accessKeyId: aws.aws_access_key_id,
     secretAccessKey: aws.aws_secret_access_key,
 }
-
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 class Upload extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
             selectedFile: null,
-            isUploading: false
+            isUploading: false,
+            open: false,
+            error: false
         };
 
         this.onFileChange = this.onFileChange.bind(this);
         this.onFileUpload = this.onFileUpload.bind(this);
+        this.handleClose = this.handleClose.bind(this);
     }
+
 
     componentDidMount() {
         console.log(this.props)
@@ -41,8 +49,17 @@ class Upload extends Component {
             .then(data => {
                 console.log(data)
                 this.setState({ isUploading: false })
+                this.setState({ open: true })
             })
-            .catch(err => console.error(err))
+            .catch(err => {
+                console.error(err)
+                this.setState({ error: true })
+                this.setState({ isUploading: false })
+            })
+    }
+
+    handleClose() {
+        this.setState({ open: false, error: false })
     }
 
     render() {
@@ -54,6 +71,16 @@ class Upload extends Component {
                 <button className="Submit" variant="primary" onClick={this.onFileUpload}>
                     Upload File
                 </button>
+                <Snackbar open={this.state.open} autoHideDuration={6000} onClose={this.handleClose}>
+                    <Alert onClose={this.handleClose} severity="success">
+                        Your file was uploaded successfully!!
+                    </Alert>
+                </Snackbar>
+                <Snackbar open={this.state.error} autoHideDuration={6000} onClose={this.handleClose}>
+                    <Alert onClose={this.handleClose} severity="error">
+                        There was an error uploading your file!!
+                    </Alert>
+                </Snackbar>
             </div>
         )
     }
