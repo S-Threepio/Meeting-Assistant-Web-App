@@ -1,0 +1,14 @@
+.Transcription {
+    background-color: #FFFFFF;
+    height: 80vh;
+    padding: 20px;
+    font-weight: bolder;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+}
+
+.Transcription .text {
+    text-align: left;
+}
+

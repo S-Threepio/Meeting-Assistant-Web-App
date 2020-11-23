@@ -12,7 +12,7 @@ class Navbar extends Component {
                 <div className="menu-icon" onClick={() => this.props.clickHandler(!this.props.isClicked)}>
                     <i className='fas fa-bars'></i>
                 </div>
-                <h1 className="navbar-logo" key = {this.props.title}>{this.props.title}<i className="fab fa-react"></i></h1>
+                <h1 className="navbar-logo">{this.props.title}<i className="fab fa-react"></i></h1>
 
                 <ul className={this.props.isClicked ? 'nav-menu active' : 'nav-menu'}>
                     {

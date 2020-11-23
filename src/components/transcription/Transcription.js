@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from "react-router-dom";
+import '../transcription/Transcription.css'
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+
 
 function Transcription(props) {
     const location = useLocation();
@@ -11,9 +16,17 @@ function Transcription(props) {
 
 
     return (
-        <div>
-         <h1>Transcription page</h1>   
+        <div className="Transcription">
+            <h1>{location.state.detail.id}</h1>
+            <Container fixed>
+                <Typography component="div" className="text">{location.state.detail.transcription}</Typography>
+            </Container>
         </div>
+
+        // <div className="Transcription">
+
+        //     
+        // </div>
     )
 }
 

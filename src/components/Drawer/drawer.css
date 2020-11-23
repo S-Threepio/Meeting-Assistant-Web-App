@@ -1,7 +1,13 @@
-.sprint-content{
-    text-decoration: none;
+.sprint-content {
     text-decoration-color: black;
     color: black;
+    font-weight: bolder;
     text-decoration: none;
     background-color: #778899;
+}
+
+.MuiListItem-root {
+    text-decoration-color: black;
+    color: black;
+    font-weight: bolder;
 }
