@@ -12,3 +12,7 @@
 .sprint-content .MuiListItemIcon-root{
     color: #000000;
 }
+
+.sprint-content .MuiButtonBase-root .MuiListItem-root .MuiListItem-gutters .MuiListItem-button{
+    background-color: #204854;
+}

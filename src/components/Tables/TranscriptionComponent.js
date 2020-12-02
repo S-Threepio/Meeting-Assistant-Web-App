@@ -4,13 +4,23 @@ import sprints from '../../data/sprints.json'
 import { Row, Col } from 'react-simple-flex-grid';
 import "react-simple-flex-grid/lib/main.css";
 import { useHistory } from "react-router-dom";
-
-
-
+import SearchBox from '../searchbar/SearchBox';
 
 const TranscriptionComponent = (props) => {
   const history = useHistory();
   const {results,setTitle} = props
+  const [ filteredResults, setFilteredResults] = useState(results)
+  const [ searchField, setSearchField ] = useState('')
+
+
+  useEffect(() => {
+    setFilteredResults(results.filter(result => (
+      result.id.toLowerCase().includes(searchField.toLowerCase()))))
+  }, [searchField])
+
+  function handleChange (e) {
+    setSearchField(e.target.value)
+  }
 
   useEffect(() => {
     setTitle("Transcriptions")
@@ -26,8 +36,9 @@ const TranscriptionComponent = (props) => {
   function showTables(props) {
     return (
       <div className="content-table">
+        <SearchBox placeholder="Enter date..." handleChange={handleChange} />
         <Row gutter={40}>
-          {results.map(co =>
+          {filteredResults.map(co =>
             <Col gutter={50}
               xs={{ span: 6 }} sm={{ span: 5 }} md={{ span: 5 }}
               lg={{ span: 5 }} xl={{ span: 4 }}
@@ -45,7 +56,7 @@ const TranscriptionComponent = (props) => {
   //     method: 'GET',
   //     headers: headers
   // })
-  return (results ? showTables(results) : null)
+  return (filteredResults ? showTables(filteredResults) : null)
 
 }
 

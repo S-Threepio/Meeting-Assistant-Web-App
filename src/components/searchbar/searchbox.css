@@ -1,0 +1,12 @@
+.search {
+ margin-bottom: 1%;
+ background-color: ivory;
+ border: grey;
+ width: 800px;
+ padding-top: 10px;
+ padding-bottom: 10px;
+ padding-inline-start: 15px;
+ font-size: medium;
+ border-radius: 5;
+}
+

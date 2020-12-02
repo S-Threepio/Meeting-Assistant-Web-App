@@ -65,7 +65,7 @@ class Upload extends Component {
     render() {
         return (this.state.isUploading ? <div className="Upload">
             <div className="Loading">
-                <Loader type="ThreeDots" color="#2BAD60" />
+                <Loader type="ThreeDots" color="#000000" />
             </div ></div> : <div className="Upload">
                 <input className="Input" type="file" onChange={this.onFileChange} />
                 <button className="Submit" variant="primary" onClick={this.onFileUpload}>

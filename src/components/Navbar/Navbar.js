@@ -27,7 +27,7 @@ class Navbar extends Component {
                     }
 
                 </ul>
-                <Button><a style={{ color: 'black', textDecoration: 'none' }} href='/'>Log out</a></Button>
+                <Button><a style={{ color: 'white', textDecoration: 'none' }} href='/'>Log out</a></Button>
             </nav>
 
         )
