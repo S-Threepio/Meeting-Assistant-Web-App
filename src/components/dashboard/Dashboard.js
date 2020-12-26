@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import '../dashboard/dashboard.css';
 import Navbar from '../navbar/Navbar'
 import About from '../pages/About';
-import Shop from '../pages/Contact';
+import Contact from '../pages/Contact';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import TemporaryDrawer from '../drawer/Drawer'
 import TableComponent from '../tables/MoMComponent';
@@ -21,7 +21,15 @@ import MoMComponent from '../tables/MoMComponent';
 import TranscriptionComponent from '../tables/TranscriptionComponent';
 import moment from 'moment';
 
-
+function compare(a, b) {
+  if (a['id']['S'] < b['id']['S']) {
+    return 1;
+  }
+  if (a['id']['S'] > b['id']['S']) {
+    return -1;
+  }
+  return 0;
+}
 
 function Dashboard() {
 
@@ -36,13 +44,13 @@ function Dashboard() {
     axios
       .get(`/items`)
       .then(res => {
-        res.data.Items.forEach(element => {
+        res.data.Items.sort(compare).forEach(element => {
+          console.log(element['id']['S'])
           const parsed = AWS.DynamoDB.Converter.unmarshall(element)
           parsed.id = moment(parsed.id).format("D MMM YYYY")
           setResults(prevResults => ([...prevResults, parsed]))
-          setDataPoints(prevResults => ([...prevResults, { y: parsed.happinessIndex, label: parsed.id, x : count++ }]))
-        });         
-
+          setDataPoints(prevResults => ([...prevResults, { y: parseFloat(parsed.happinessIndex), label: parsed.id, x: count++ }]))
+        });
         setLoading(false)
       })
       .catch((error) => {
@@ -56,19 +64,19 @@ function Dashboard() {
   return (isLoading ? <div className="Loading">
     <Loader type="ThreeDots" color="#2BAD60" />
   </div > : <div className="Dashboard">
-      <Navbar isClicked={clicked} clickHandler={handleClick} title={title}/>
-      <TemporaryDrawer isClicked={clicked} clickHandler={handleClick}/>
+      <Navbar isClicked={clicked} clickHandler={handleClick} title={title} />
+      <TemporaryDrawer isClicked={clicked} clickHandler={handleClick} />
       <Router>
         <Switch>
           <Route path="/dashboard" exact component={() => <MoMComponent results={results} setTitle={setTitle} />} />
-          <Route path="/dashboard/transcriptions" exact component={() => <TranscriptionComponent results={results} setTitle={setTitle}/>} />
-          <Route path="/dashboard/upload" component={() =><Upload setTitle={setTitle}/>}/>
-          <Route path="/dashboard/happinessIndex" component={() => <HappinessIndex dataPoints={dataPoints} setTitle={setTitle}/>} />
-          <Route path="/dashboard/trendingTopics" component={() => <TrendingTopics results={results} setTitle={setTitle}/>} />
-          <Route path="/dashboard/transcription" component={() => <Transcription/>} setTitle={setTitle}/>
-          <Route path="/dashboard/mom" component={() => <MinutesOfMeeting/>} setTitle={setTitle}/>
-          <Route path="/dashboard/about" component={About} />
-          <Route path="/dashboard/contact" component={Shop} />
+          <Route path="/dashboard/transcriptions" exact component={() => <TranscriptionComponent results={results} setTitle={setTitle} />} />
+          <Route path="/dashboard/upload" component={() => <Upload setTitle={setTitle} />} />
+          <Route path="/dashboard/happinessIndex" component={() => <HappinessIndex dataPoints={dataPoints} setTitle={setTitle} />} />
+          <Route path="/dashboard/trendingTopics" component={() => <TrendingTopics results={results} setTitle={setTitle} />} />
+          <Route path="/dashboard/transcription" component={() => <Transcription />} setTitle={setTitle} />
+          <Route path="/dashboard/mom" component={() => <MinutesOfMeeting />} setTitle={setTitle} />
+          {/* <Route path="/dashboard/about" component={() => <About />} setTitle={setTitle}/>
+          <Route path="/dashboard/contact" component={() => <Contact />} setTitle={setTitle}/> */}
         </Switch>
       </Router>
     </div>)

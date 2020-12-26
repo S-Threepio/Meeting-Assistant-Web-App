@@ -39,7 +39,7 @@ const TranscriptionComponent = (props) => {
         <SearchBox placeholder="Enter date..." handleChange={handleChange} />
         <Row gutter={40}>
           {filteredResults.map(co =>
-            <Col gutter={50}
+            <Col key={co.id} gutter={50}
               xs={{ span: 6 }} sm={{ span: 5 }} md={{ span: 5 }}
               lg={{ span: 5 }} xl={{ span: 4 }}
             ><div className="sprint" onClick={() => handleClick(co)}><div id="head">{co.id}</div><div id="body" >{co.transcription.substring(0, 250)+"..."}</div></div></Col>

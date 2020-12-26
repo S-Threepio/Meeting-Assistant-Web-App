@@ -1,7 +1,5 @@
 .Transcription {
-    background-image: url('../../saand.jpeg')  ;
-    
-    background-size: cover ;
+    background: #2e515c;
     height: 100vh;
     padding: 20px;
     font-weight: 600;
@@ -17,6 +15,7 @@
     margin-right: 9%;
     font-weight: 600;
     text-decoration: white;
+    font-size: large;
 }
 
 .Transcription .MuiTypography-root .text .MuiTypography-body1 .MuiContainer-root .MuiContainer-fixed .MuiContainer-maxWidthLg{

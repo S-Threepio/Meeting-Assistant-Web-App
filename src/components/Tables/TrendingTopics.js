@@ -25,7 +25,8 @@ const TrendingTopics = (props) => {
   
 
     useEffect(() => {
-        setTitle("Trending topics")
+        console.log(results)
+        setTitle("Important topics")
     }, [])
 
     function handleClick(props) {
@@ -41,7 +42,7 @@ const TrendingTopics = (props) => {
                 <SearchBox placeholder="Enter date..." handleChange={handleChange} />
                 <Row gutter={40}>
                     {filteredResults.map(co =>
-                        <Col gutter={50}
+                        <Col key={co.id} gutter={50}
                             xs={{ span: 6 }} sm={{ span: 5 }} md={{ span: 5 }}
                             lg={{ span: 5 }} xl={{ span: 4 }}
                         ><div className="sprint"><div id="head">{co.id}</div><div id="body" ><ul className="trendingTopics">{co.trendingTopics.map(t =><li>{t}</li>)}</ul></div></div></Col>
